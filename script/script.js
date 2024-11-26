@@ -6,7 +6,7 @@ let categoriesList = new Array();
 
 let listAuthors = document.getElementById("listAuthors");
 let listCategories = document.getElementById("listCategories");
-let listBooks = document.getElementById('booksList');
+let listBooks  = document.getElementById('booksList');
 
 
 listAuthors.addEventListener('change', chargeByAuthor);
@@ -184,19 +184,6 @@ function showBooks(_books) {
 
 }
 
-// function rechercheL(){
-//     let inuput = document.getElementById('rechercheInput').value.toLowerCase();
-//     let bookList = document.getElementById('bookList');
-    
-//     for (let i = 0; i < bookList.length; i++){
-//         let book = books[i];
-//         let text = book.textContent.toLowerCase();
-//         if (text.includes(input)){
-//             book.style.display= '';
-//         } else{
-//             book.style.display = 'none';
-//         }
-//     }
 // Fonction appelée lors du chargement d'auteur dans la liste déroulante
 function chargeByAuthor() { }
 
