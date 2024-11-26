@@ -1,0 +1,149 @@
+* {
+  margin: 2px;
+  padding: 2px;
+
+}
+
+body {
+  background-color: #3B4252;
+}
+
+
+#booksList {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 1vw;
+  padding: 10px;
+  height: 45vh;
+  width: 15vw;
+  background-color: rgb(247, 247, 247);
+  box-shadow: 10px 5px 10px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+  overflow-y: auto;
+  /*permet de définir les bords de la carte*/
+
+
+}
+
+img {
+  max-height: 40%;
+  object-fit: fill;
+}
+
+.booktitle {
+
+  max-height: 30%;
+  min-height: auto;
+  font-size: 1.3em;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: none;
+
+}
+
+.infobulle {
+  position: relative;
+  /* les .infobulle deviennent référents */
+  cursor: help;
+  background-color: none;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: antiquewhite;
+
+}
+
+h4 {
+  display: flex;
+  background: none;
+  border: solid 1px;
+  border-color: black;
+  margin: 2px;
+
+}
+
+p {
+  margin-top: 100px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* on génère un élément :after lors du survol et du focus :*/
+.infobulle:hover::after,
+.infobulle:focus::after {
+  content: attr(aria-label);
+  /* on affiche aria-label */
+  position: absolute;
+  top: -2.4em;
+  left: 50%;
+  transform: translateX(-50%);
+  /* on centre horizontalement  */
+  z-index: 1;
+  /* pour s'afficher au dessus des éléments en position relative */
+  white-space: nowrap;
+  /* on interdit le retour à la ligne */
+}
+
+.category {
+  margin-top: 5px;
+  max-height: 30%;
+  min-height: auto;
+  font-size: 1em;
+
+}
+
+#listAuthors {
+  display: flex;
+  position: relative;
+  border: inset 4px;
+  border-radius: 2rem;
+  border-color: #88c0d0;
+  background-color: rgb(222, 231, 231);
+  width: 35%;
+  margin: 10px;
+
+}
+
+#listCategories {
+  display: flex;
+  position: relative;
+  border: inset 4px;
+  border-radius: 2rem;
+  border-color: #88c0d0;
+  background-color: rgb(222, 231, 231);
+  width: 35%;
+  margin: 10px;
+
+}
+
+.recherche {
+  text-align: right;
+
+}
+
+
+.card {
+  display: flex;
+  border: inset 4px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-color: #ebcb8b;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 400px;
+  width: 22%;
+  background: linear-gradient(135deg, #3B4252, #2a9d8f);
+  transition: background 0.4s ease-in-out;
+}
+
+
+.card:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, #88c0d0, #2a9d8f);
+}
