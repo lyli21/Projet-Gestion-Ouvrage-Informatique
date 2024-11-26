@@ -65,7 +65,7 @@ h4 {
   background: none;
   border: solid 1px;
   border-color: black;
-  margin: 2px;
+  margin: 2.5px;
 
 }
 
@@ -110,6 +110,7 @@ p {
 
 }
 
+
 #listCategories {
   display: flex;
   position: relative;
@@ -123,6 +124,8 @@ p {
 }
 
 .recherche {
+  display: flex;
+  justify-content: flex-end;
   text-align: right;
 
 }

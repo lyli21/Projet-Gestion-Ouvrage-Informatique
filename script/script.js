@@ -6,7 +6,7 @@ let categoriesList = new Array();
 
 let listAuthors = document.getElementById("listAuthors");
 let listCategories = document.getElementById("listCategories");
-let listBooks  = document.getElementById('booksList');
+let listBooks = document.getElementById('booksList');
 
 
 listAuthors.addEventListener('change', chargeByAuthor);
@@ -98,68 +98,71 @@ function showBooks(_books) {
         }
 
         let isbn;
-        if (_books[y].isbn.length){
-            isbn =  _books[y].isbn;
-        } else {
-            isbn = _books[y].isbn
+        try {
+            if (_books[y].isbn.length) {
+                isbn = _books[y].isbn;
+            } else {
+                isbn = _books[y].isbn
+            }
+        } catch (error) {
+            isbn = "pas d'isbn";
         }
-        
+
+
         let pageCount;
-        if (_books[y].pageCount){
+        if (_books[y].pageCount) {
             pageCount = _books[y].pageCount;
         } else {
             pageCount = _books[y].pageCount
         }
 
         let status;
-        if(_books[y].status){
+        if (_books[y].status) {
             status = _books[y].status;
         } else {
             status = _books[y].status
         }
 
         let authors;
-        if (_books[y].authors){
-            authors= _books[y].authors
+        if (_books[y].authors) {
+            authors = _books[y].authors
         }
 
         let categories;
-        if (_books[y].categories){
-            categories=_books[y].categories
+        if (_books[y].categories) {
+            categories = _books[y].categories
         }
 
 
-        let description;
+        let longDescription;
         let shortDescription;
 
-        if (_books[y].shortDescription== undefined ||
-            _books[y].shortDescription == null) {
-               shortDescription= 'Pas de description';
+        if (_books[y].shortDescription == undefined || _books[y].shortDescription == null) {
+            shortDescription = 'Pas de description';
 
 
-            if (_books[y].description == undefined || 
-                _books[y].description == null) {
-                description = 'Pas de description';
+            if (_books[y].longDescription == undefined || _books[y].longDescription == null) {
+                longDescription = 'Pas de description';
             }
             else {
-                shortDescription = _books[y].description.substring(0, 100);
+                longDescription = _books[y].longDescription.substring(0, 100);
             }
-
         }
         else {
-            description = _books[y].shortDescription;
+            shortDescription = _books[y].shortDescription;
         }
 
         if (_books[y].shortDescription == undefined ||
             _books[y].shortDescription == null) {
 
-            description = _books[y].longDescription;
-        } else {
+            
             description = "Pas de description";
+        } else {
+            shortDescription = _books[y].longDescription;
         }
 
 
-        description = _books[y].shortDescription;
+        longDescription = _books[y].shortDescription;
         if (_books[y].shortDescription > 100) {
             shortDescription = _books[y].shortDescription.substring(0, 100) + " (...)";
         } else {
@@ -168,24 +171,59 @@ function showBooks(_books) {
 
         book.innerHTML = '<img src ="' + _books[y].thumbnailUrl + '" />' +
             '<h5 class="booktitle"><span class="infobulle" title="' +
-            _books[y].title +'">' + 
-            titre + '<br>' +'Isbn : ' + isbn + '<br>' + 'Page count : ' +
-            pageCount + '<br>' + 'status : ' + 
-            status + '<br>' + 'Authors : ' + authors + '<br>'  + 'Categories : ' +  categories + '</span></h1>' +
-            '<p> <span class="infobulle" title="' +
-            description +
-            '">' + description + '<br>' + '</span></h5>';
-
+            _books[y].title + '">' +
+            titre + "</h5>" + '<h6>' + 
+            'Isbn :' + isbn + '</h6>' + '<p>' + 
+            'Page count : ' + pageCount + '<br>' + 
+            'status : ' + status + '<br>' + 
+            'Authors : ' + authors + '<br>' +
+             'Categories : ' + categories + '</span>' + '<p> <span class="infobulle" title="' + shortDescription + '">' + 
+             longDescription + '</span>';
 
         listBooks.appendChild(book);
 
     }
 
-
 }
 
 // Fonction appelée lors du chargement d'auteur dans la liste déroulante
-function chargeByAuthor() { }
+function chargeByAuthor() {
+
+    let strAuthor = listAuthors.options[listAuthors.selectedIndex].text;
+    console.log(strAuthor);
+    let bookByAuthor = new Array();
+    if (strAuthor == null || strAuthor == undefined) { 
+        return showBooks(bookList); /*  liste des livres  */
+    }
+    else {
+        for (let x = 0; x < bookList.length; x++) { /*si il y est "*/
+            let book =  bookList[x]; /* ça sort le livre */
+            if (book.authors.indexOf(strAuthor) != -1) { /* auteur souhaité */
+                bookByAuthor.push(book); /* Dans la variable */
+            }
+        }
+    }
+    bookByAuthor.sort();
+    showBooks(bookByAuthor);
+
+ }
 
 // Fonction appelée lors du chargement de catégorie dans la liste déroulante
-function chargeByCategory() { }
+function chargeByCategory() { 
+
+let strCategories = listCategories.options[listCategories.selectedIndex].text;
+console.log(strCategories);
+let bookByCategories = new Array ();
+if (strCategories == null || strCategories == undefined){
+    return showBooks(bookList);
+} else {
+    for (let k = 0; k < bookList.length; k++ ){
+        let book = bookList[k];
+        if (book.categories.indexOf(strCategories)!= -1){
+            bookByCategories.push(book);
+        }
+    }
+}
+bookByCategories.sort();
+showBooks(bookByCategories);
+}
